@@ -1,5 +1,7 @@
 React Refetch
 =========================
+This is a **fork** of https://github.com/heroku/react-refetch
+
 A simple, declarative, and composable way to fetch data for React components.
 
 ![React Refetch Logo](logo.png)
