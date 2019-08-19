@@ -1,6 +1,6 @@
 {
   "name": "@iloveupal/react-refetch",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A fork of @heroku/react-refetch. A simple, declarative, and composable way to fetch data for React components.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
