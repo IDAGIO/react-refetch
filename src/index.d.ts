@@ -66,6 +66,7 @@ export interface Connect {
 export interface ConnectOptions {
   withRef?: boolean;
   pure?: boolean;
+  abortOnUnmount?: boolean;
 }
 
 export type MapPropsToRequestsToProps<T> = (
