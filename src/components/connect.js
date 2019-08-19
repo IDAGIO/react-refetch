@@ -9,6 +9,8 @@ import hoistStatics from 'hoist-non-react-statics'
 import invariant from 'invariant'
 import warning from 'warning'
 
+const AbortController = window.AbortController
+
 const defaultMapPropsToRequestsToProps = () => ({})
 
 function getDisplayName(WrappedComponent) {
@@ -100,7 +102,8 @@ function connect(mapPropsToRequestsToProps, defaults, options) {
 
   options = Object.assign({
     withRef: false,
-    pure: true
+    pure: true,
+    abortOnUnmount: false
   }, options)
 
   // Helps track hot reloading.
@@ -196,6 +199,8 @@ function connect(mapPropsToRequestsToProps, defaults, options) {
         super(props, context)
         this.version = version
         this.state = { mappings: {}, startedAts: {}, data: {}, refreshTimeouts: {} }
+
+        this.abortController = options.abortOnUnmount ? new AbortController() : null
       }
 
       componentWillMount() {
@@ -218,6 +223,8 @@ function connect(mapPropsToRequestsToProps, defaults, options) {
       }
 
       componentWillUnmount() {
+        options.abortOnUnmount && this.abortController.abort()
+
         this.clearAllRefreshTimeouts()
         this._unmounted = true
       }
@@ -270,6 +277,7 @@ function connect(mapPropsToRequestsToProps, defaults, options) {
       }
 
       createPromise(prop, mapping, startedAt) {
+
         const meta = mapping.meta
         const initPS = this.createInitialPromiseState(prop, mapping)
         const onFulfillment = this.createPromiseStateOnFulfillment(prop, mapping, startedAt)
@@ -291,7 +299,7 @@ function connect(mapPropsToRequestsToProps, defaults, options) {
           meta.request = request
           this.setAtomicState(prop, startedAt, mapping, initPS(meta))
 
-          const fetched = mapping.fetch(request)
+          const fetched = mapping.fetch(request, options.abortOnUnmount && { signal: this.abortController.signal })
           return fetched
             .then(response => {
               meta.response = response
