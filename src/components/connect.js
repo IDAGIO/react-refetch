@@ -299,7 +299,7 @@ function connect(mapPropsToRequestsToProps, defaults, options) {
           meta.request = request
           this.setAtomicState(prop, startedAt, mapping, initPS(meta))
 
-          const fetched = mapping.fetch(request, options.abortOnUnmount && { signal: this.abortController.signal })
+          const fetched = mapping.fetch(request, options.abortOnUnmount ? { signal: this.abortController.signal } : undefined)
           return fetched
             .then(response => {
               meta.response = response
