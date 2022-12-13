@@ -1,5 +1,5 @@
 {
-  "name": "@iloveupal/react-refetch",
+  "name": "@idagio/react-refetch",
   "version": "2.1.2",
   "description": "A fork of @heroku/react-refetch. A simple, declarative, and composable way to fetch data for React components.",
   "main": "./lib/index.js",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iloveupal/react-refetch.git"
+    "url": "https://github.com/idagio/react-refetch.git"
   },
   "files": [
     "lib"
@@ -35,9 +35,9 @@
   "author": "Heroku",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iloveupal/react-refetch/issues"
+    "url": "https://github.com/idagio/react-refetch/issues"
   },
-  "homepage": "https://github.com/iloveupal/react-refetch",
+  "homepage": "https://github.com/idagio/react-refetch",
   "devDependencies": {
     "babel-cli": "^6.3.17",
     "babel-core": "^6.3.26",
